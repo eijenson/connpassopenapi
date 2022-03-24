@@ -1,0 +1,65 @@
+openapi: 3.0.0
+info:
+  title: 猫情報取得
+  description: |
+    猫の情報を取得するためのAPIを定義します
+  version: 1.0.0
+tags:
+  - name: Cat
+paths:
+  # Whole board operations
+  /cats:
+    post:
+      summary: 猫一覧取得
+      description: 猫の情報を一覧で取得します
+      tags:
+        - Cat
+      operationId: get-board
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: string
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/status"
+
+components:
+  schemas:
+    cat:
+      properties:
+        id:
+          $ref: "#/components/schemas/id"
+        name:
+          $ref: "#/components/schemas/name"
+    id:
+      type: string
+      description: 猫のID
+      example: "12345"
+    name:
+      type: string
+      description: 猫の名前
+      example: "タマ"
+    cats:
+      type: array
+      items:
+        type: array
+        items:
+          $ref: "#/components/schemas/cat"
+    status:
+      type: string
+      enum: ["yes", "no"]
+      description: 通信に成功したかどうかを返す
+      example: "yes"
+    get_cat_response:
+      type: object
+      properties:
+        status:
+          $ref: "#/components/schemas/status"
+        cats:
+          $ref: "#/components/schemas/cats"
