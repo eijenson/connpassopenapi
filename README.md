@@ -1,1 +1,2 @@
-# connpassopenapi
+openapi.yamlを編集して、
+generate_kotlin_and_swift.sh を叩いてkotlinとswiftのソースコードを生成する
